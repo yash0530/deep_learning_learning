@@ -12,6 +12,7 @@
 
 ### Foundation - Deep Learning
 - [Andrej Karpathy's Zero to Deep Learning](https://karpathy.ai/zero-to-hero.html)
+- [Deep Learning Book](https://deeplearningwithpython.io/chapters/)
 
 ### Coursera For NNs
 - [NNs](https://www.coursera.org/learn/neural-networks-deep-learning/home/module/1)
@@ -55,9 +56,6 @@
 
 - [Mixture of Experts](https://arxiv.org/pdf/2401.04088)
 - [LoRA](https://arxiv.org/pdf/2106.09685)
-
-----
-
 - [Learning Transferable Visual Models From Natural Language Supervision](https://proceedings.mlr.press/v139/radford21a/radford21a.pdf)
 - [Flamingo: a Visual Language Model for Few-Shot Learning](https://proceedings.neurips.cc/paper_files/paper/2022/file/960a172bc7fbf0177ccccbb411a7d800-Paper-Conference.pdf)
 - [Visual Instruction Tuning](https://proceedings.neurips.cc/paper_files/paper/2023/file/6dcf277ea32ce3288914faf369fe6de0-Paper-Conference.pdf)
