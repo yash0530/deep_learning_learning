@@ -1,4 +1,4 @@
-Based on the video, here are the core concepts and their intuitive explanations, centered around the problem of choosing the best Amazon seller given different ratings and review counts.
+[Video](https://www.youtube.com/watch?v=8idr1WZ1A7Q&t=2s)
 
 ### 1. The "Trade-off" Intuition
 * **Concept:** Balancing average rating vs. the quantity of data.
