@@ -80,3 +80,51 @@
     $$\text{Likelihood}(s) \propto s^{\text{positive}} (1-s)^{\text{negative}}$$
     *(Note: The binomial coefficient is constant for a fixed set of data, so the shape depends entirely on this term.)*
 
+------
+
+### **1. The Seller Selection Problem**
+**Concept:** The video begins with a practical dilemma: which seller should you trust?
+* Seller A: 100% positive rating (10 reviews)
+* Seller B: 96% positive rating (50 reviews)
+* Seller C: 93% positive rating (200 reviews)
+
+**Intuitive Explanation:**
+We instinctively hesitate to trust the 100% rating because the sample size (10 reviews) is too small. We feel more "confident" in the 96% rating because 50 reviews provide more data to back it up. The core challenge is making this intuition quantitative: how do we balance a high rating against the "weight" of evidence? [[00:27](http://www.youtube.com/watch?v=8idr1WZ1A7Q&t=27)]
+
+### **2. Laplace's Rule of Succession**
+**Concept:** A simple historical heuristic to estimate the probability of success when data is limited.
+
+**Formula:**
+$$P(\text{success}) = \frac{\text{Successes} + 1}{\text{Total Trials} + 2}$$
+
+**Intuitive Explanation:**
+When calculating the success rate, you "pretend" you have observed two additional trials: one success and one failure.
+* For Seller A (10/10 successes), you calculate $\frac{10+1}{10+2} = \frac{11}{12} \approx 91.7\%$.
+* For Seller B (48/50 successes), you calculate $\frac{48+1}{50+2} = \frac{49}{52} \approx 94.2\%$.
+* This rule "dampens" extreme values (like 0% or 100%) toward 50%, representing our uncertainty when data is scarce. According to this rule, Seller B is actually the best bet. [[01:43](http://www.youtube.com/watch?v=8idr1WZ1A7Q&t=103)]
+
+### **3. The Binomial Distribution**
+**Concept:** A probability distribution that models the likelihood of a specific set of outcomes (e.g., 48 positive reviews out of 50) given a fixed underlying success rate ($s$).
+
+**Formula:**
+$$P(\text{data} | s) = \binom{n}{k} s^k (1-s)^{n-k}$$
+
+**Intuitive Explanation of Components:**
+* **$s^k (1-s)^{n-k}$:** This is the probability of seeing one *specific* pattern of results (e.g., first 48 are good, last 2 are bad). We multiply the probability of success ($s$) $k$ times and the probability of failure ($1-s$) $n-k$ times because the reviews are assumed to be independent [[07:38](http://www.youtube.com/watch?v=8idr1WZ1A7Q&t=458)].
+* **$\binom{n}{k}$ (n choose k):** This counts all the different "patterns" or ways you could get that result. For example, the 2 bad reviews didn't have to be the last two; they could have been the first two, or scattered in the middle. This term accounts for all those permutations [[06:58](http://www.youtube.com/watch?v=8idr1WZ1A7Q&t=418)].
+
+### **4. The Likelihood Function (Probability of Probabilities)**
+**Concept:** Instead of assuming we know the success rate $s$ and calculating the probability of the data, we look at the data we *have* and ask which success rate $s$ is most likely.
+
+**Intuitive Explanation:**
+* If you plot the binomial formula as a function of $s$ (letting $s$ range from 0 to 1), you get a curve (a "pile").
+* **The Peak:** The peak of this curve sits at the success rate that makes the observed data most probable (e.g., 0.96).
+* **The Width (Confidence):** The width of the curve represents our uncertainty.
+    * For the seller with 10 reviews, the curve is wide, meaning the true rate could plausibly be 90%, 95%, or 99%.
+    * For the seller with 200 reviews, the curve would be very narrow ("concentrated"), meaning we are very confident the true rate is close to the observed average [[10:27](http://www.youtube.com/watch?v=8idr1WZ1A7Q&t=627)].
+
+### **5. The Distinction: $P(\text{Data} | s)$ vs. $P(s | \text{Data})$**
+**Concept:** The video concludes by noting a subtle but critical logical step. The binomial distribution gives us the probability of seeing the data *if* we knew the success rate ($P(\text{Data} | s)$). However, what we really want is the probability of a success rate *given* the data we saw ($P(s | \text{Data})$).
+
+**Intuitive Explanation:**
+While the peak of the binomial curve is at the observed average (e.g., 100%), we intuitively know that the true probability of a perfect experience is not actually 100%. To mathematically get from "Probability of Data" to "Probability of the Parameter," we need **Bayesian Inference**, which is the subject of the next video in the series [[11:50](http://www.youtube.com/watch?v=8idr1WZ1A7Q&t=710)].
