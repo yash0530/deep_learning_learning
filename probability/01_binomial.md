@@ -33,3 +33,50 @@
     * **Visual Intuition:**
         * **Lots of Data (50 reviews):** The curve is a tall, narrow spike around 96%. This means we are very confident the true rate is near 96%.
         * **Little Data (10 reviews):** The curve is a wide, gentle slope. Even if the peak is at 100%, the curve stays high for 90% or 80%, meaning the true rate could plausibly be much lower. The width of this curve represents our uncertainty.
+
+-------
+
+### **1. The Seller Selection Problem**
+* **Concept:** The video introduces a scenario where you must choose between sellers with different ratings and review counts to optimize your chance of a good experience.
+* **The Dilemma:** There is a trade-off between a high absolute percentage rating and the "confidence" provided by a larger number of reviews.
+    * Seller A: 100% positive (10 reviews)
+    * Seller B: 96% positive (50 reviews)
+    * Seller C: 93% positive (200 reviews)
+* **Intuition:** We instinctively distrust 100% ratings with few reviews because the sample size is too small to rule out luck, whereas a slightly lower rating with many reviews feels more "stable."
+
+### **2. Laplace's Rule of Succession**
+* **Concept:** A simple historical rule to estimate the true probability of success given limited data.
+* **Formula:**
+    $$P(\text{next outcome is positive}) = \frac{\text{Positive Reviews} + 1}{\text{Total Reviews} + 2}$$
+* **Intuitive Explanation:** You pretend to have two additional reviews—one positive and one negative—before calculating the percentage. This "dampens" extreme values (like 100% or 0%) towards 50%, especially when the sample size is small.
+* **Application to the Problem:**
+    * **Seller A (10/10):** Becomes $11/12 \approx 91.7\%$
+    * **Seller B (48/50):** Becomes $49/52 \approx 94.2\%$ (The Winner)
+    * **Seller C (186/200):** Becomes $187/202 \approx 92.6\%$
+
+### **3. The Binomial Distribution**
+* **Concept:** A probability distribution that models the likelihood of seeing a specific number of "successes" (positive reviews) in a fixed number of independent trials (total reviews), given a constant underlying success rate ($s$).
+* **Formula:**
+    $$P(k \mid n, s) = \binom{n}{k} s^k (1-s)^{n-k}$$
+    Where:
+    * $n$ = Total number of reviews (trials)
+    * $k$ = Number of positive reviews (successes)
+    * $s$ = The hypothetical underlying success rate (probability of a positive review)
+* **Intuitive Explanation of Components:**
+    * $\binom{n}{k}$ ("n choose k"): Counts the number of different patterns in which the reviews could occur (e.g., getting the bad reviews early vs. late).
+    * $s^k$: The probability of the specific positive reviews happening.
+    * $(1-s)^{n-k}$: The probability of the specific negative reviews happening.
+
+### **4. Likelihood Function (Probability of Data given $s$)**
+* **Concept:** Instead of assuming $s$ is known and calculating the probability of data, we look at the observed data and see how its probability changes as we vary the hypothetical success rate $s$.
+* **Intuitive Explanation:**
+    * If you plot the probability of seeing the data (e.g., 48 positive, 2 negative) against all possible values of $s$ (from 0 to 1), you get a curve.
+    * **The Peak:** The peak of this curve sits at the observed percentage (e.g., 0.96 for Seller B). This is the value of $s$ that makes the observed data *most* likely.
+    * **The Width:** The width of the curve represents uncertainty.
+        * **Seller A (10/10):** The curve increases towards $s=1$ but is fairly wide, meaning many values of $s$ (like 0.90 or 0.85) are still plausible.
+        * **Seller B (48/50):** The curve is narrower and centered at 0.96.
+        * **Seller C (186/200):** If we had even more data (e.g., 480 positive, 20 negative), the curve would be extremely narrow (a "spike"), indicating very high confidence in the true rate.
+* **Formula Behavior:**
+    $$\text{Likelihood}(s) \propto s^{\text{positive}} (1-s)^{\text{negative}}$$
+    *(Note: The binomial coefficient is constant for a fixed set of data, so the shape depends entirely on this term.)*
+
