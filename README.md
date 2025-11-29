@@ -13,6 +13,7 @@
 ### Foundation - Deep Learning
 - [Andrej Karpathy's Zero to Deep Learning](https://karpathy.ai/zero-to-hero.html)
 - [Deep Learning Book](https://deeplearningwithpython.io/chapters/)
+- [Transformer Explainer](https://poloclub.github.io/transformer-explainer/)
 
 ### Coursera For NNs
 - [NNs](https://www.coursera.org/learn/neural-networks-deep-learning/home/module/1)
